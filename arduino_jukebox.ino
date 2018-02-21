@@ -8,13 +8,15 @@
 #include <SFEMP3Shield.h>
 #include <SFEMP3ShieldConfig.h>
 #include <SFEMP3Shieldmainpage.h>
+#include <LiquidCrystal.h>
+
 
 //Simple example of using Sparkfun's MP3 Shield. You need to install the SdFat and SFEMP3Shield libraries first.
 
 //Select include SdFat library from Sketch menu 
 
 
-
+LiquidCrystal lcd(8, 9, 4, 5, 6, 7);
 
 
 int trackNumber = 1;
@@ -30,6 +32,7 @@ const uint16_t monoMode = 1;  // Mono setting 0=off, 3=max
 
 //In void setup you need to functions which are define below
 void setup(){
+  lcd.begin(16, 2);
   initSD();  // Initialize the SD card
   initMP3Player(); // Initialize the MP3 Shield
 }
@@ -37,13 +40,24 @@ void setup(){
 void loop()
 {
 
-
+if (trackNumber == 0) {
+      MP3player.playTrack(0); //plays track 1 (track000.mp3)
+//lcd.print("ddworman presents: soundclout project uno");
   
-  MP3player.playTrack(1); //plays track 1 (track001.mp3)
- }
- 
- 
 
+ }
+
+ else if (trackNumber == 1) {
+   MP3player.playTrack(1); //plays track 2 (track001.mp3)
+   //lcd.print("ddworman presents: poles 1469");
+
+ }
+
+else if (trackNumber == 2) {
+   MP3player.playTrack(2); //plays track 2 (track002.mp3)
+   //lcd.print("ddworman presents: narkotik kal");
+ 
+}
 //function to intialize SD card. Leave it alone unless you know what you're doing.
 
 void initSD()
